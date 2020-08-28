@@ -21,3 +21,8 @@ export const changeOnDropdown = (orderId, chosenData, type) => ({
   chosenData,
   chosenType: type,
 });
+
+export const toggleEditMode = (orderId) => ({
+  type: actionTypes.TOGGLE_EDIT_MODE,
+  orderId,
+});

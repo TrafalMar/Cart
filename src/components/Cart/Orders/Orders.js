@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import styles from "./Orders.module.css";
@@ -10,6 +10,12 @@ import Aux from "../../../hoc/_aux";
 
 function Orders(props) {
   const { orders, removeOrder } = props;
+  // const [scrollOffset, setScrollOffset] = useState(window.pageYOffset);
+
+  useEffect(() => {
+    // window.scrollTo(0, scrollOffset);
+  }, []);
+
   return (
     <Aux>
       <div className={styles.Orders}>
@@ -25,7 +31,7 @@ function Orders(props) {
         )}
       </div>
       <div className={styles.Info}>
-        <Summarizer cart={orders} />
+        <Summarizer orders={orders} />
       </div>
     </Aux>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./Cart.module.css";
 
 import { Orders as cartData } from "./dumyData";
@@ -15,7 +15,6 @@ const Cart = (props) => {
 
   useEffect(() => {
     // set orders in redux
-    console.log("useEffect: ", cartData);
     setOrders(cartData.orders);
   }, []);
 

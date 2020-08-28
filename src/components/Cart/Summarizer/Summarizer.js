@@ -29,15 +29,33 @@ const Summarizer = (props) => {
       window.removeEventListener("resize", fixateOrderInfo(window, 30));
       window.removeEventListener("scroll", fixateOrderInfo(window, 30));
     };
-  });
+  }, []);
 
-  const { cart } = props;
+  const countOrderPrice = (order) => {
+    let price = parseInt(order.price);
+
+    if (order.chosenSize.value) {
+      price = parseInt(order.chosenSize.value);
+    }
+
+    if (order.chosenColor.value) {
+      price += parseInt(order.chosenColor.value);
+    }
+
+    if (order.chosenCount && order.chosenCount.value) {
+      price *= order.chosenCount.value;
+    }
+
+    return price;
+  };
+
+  const { orders } = props;
   return (
     <div className={styles.Summarizer}>
       <div className={styles.Header}>
         <div className={styles.Title}>Информация о заказе</div>
       </div>
-      {cart.map(
+      {orders.map(
         (order) =>
           !order.isDeferred && (
             <div key={order.name} className={styles.SummarizeItem}>
@@ -49,7 +67,7 @@ const Summarizer = (props) => {
                   </span>
                 ) : null}
               </div>
-              <div className={styles.Price}>₴{order.price}</div>
+              <div className={styles.Price}>₴{countOrderPrice(order)}</div>
             </div>
           )
       )}
@@ -57,24 +75,9 @@ const Summarizer = (props) => {
         <span>ВСЕГО:</span>
         <span className={styles.SumPrice}>
           <span style={{ paddingRight: "10px" }}>₴</span>
-          {cart.reduce((sum, cur) => {
+          {orders.reduce((sum, cur) => {
+            let price = countOrderPrice(cur);
             if (!cur.isDeferred) {
-              let price = parseInt(cur.price);
-
-              if (cur.chosenSize.value) {
-                price += parseInt(cur.chosenSize.value);
-              }
-
-              if (cur.chosenColor.value) {
-                price += parseInt(cur.chosenColor.value);
-              }
-
-              if (cur.chosenCount && cur.chosenCount.value) {
-                price *= cur.chosenCount.value;
-              }
-
-              console.log(sum);
-
               return sum + price;
             }
             return sum;

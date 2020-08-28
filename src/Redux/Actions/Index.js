@@ -1,1 +1,7 @@
-export { setOrders, removeOrder, defferOrder, changeOnDropdown } from "./Cart";
+export {
+  setOrders,
+  removeOrder,
+  defferOrder,
+  changeOnDropdown,
+  toggleEditMode,
+} from "./Cart";

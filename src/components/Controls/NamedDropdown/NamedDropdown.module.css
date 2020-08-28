@@ -31,7 +31,8 @@
 }
 
 .NamedDropdown .Name {
-  margin-right: 15px;
+  white-space: nowrap;
+  margin-right: 10px;
 }
 
 .NamedDropdown .Control:hover {

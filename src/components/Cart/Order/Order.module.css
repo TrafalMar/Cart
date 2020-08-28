@@ -39,7 +39,8 @@
 .Order .LongDash {
   position: relative;
   line-height: 1.111vw;
-  width: 2.578vw;
+  width: 7.578vw;
+  max-width: 90px;
   display: block;
 }
 
@@ -118,15 +119,28 @@
   margin-bottom: 20px;
 }
 
-.Order .EditLink {
+.Order .EditToggler {
   display: inline-flex;
   /* font-size: 0.972vw;
   line-height: 1.111vw; */
   font-size: 14px;
   margin-right: 2.188vw;
   color: rgba(0, 0, 0, 0.4);
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
   /* margin-bottom: 2.891vw; */
   margin-bottom: 30px;
+  transition: color 0.1s;
+}
+
+.Order .EditToggler:hover {
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.Order .EditToggler:focus {
+  outline: none;
 }
 
 .Order .AdditionalFeatures {

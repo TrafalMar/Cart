@@ -8,21 +8,13 @@ import NamedDropdown from "../../Controls/NamedDropdown/NamedDropdown";
 import NamedInput from "../../Controls/Input/Input";
 import UnderlinedButton from "../../Controls/UnderlinedButton/UnderlinedButton";
 
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/Index";
 
 const Order = (props) => {
-  const {
-    orderData: od,
-    onRemove,
-    changeOnDropdown,
-    // changeColor,
-    // changeCount,
-  } = props;
+  const { orderData: od, onRemove, changeOnDropdown, toggleEditMode } = props;
 
   const dropdownChangeHandler = (e, orderId, type) => {
-    console.log("Handler");
     const chosenData = { label: e.label, value: e.value };
     changeOnDropdown(orderId, chosenData, type);
   };
@@ -51,27 +43,35 @@ const Order = (props) => {
         </div>
         <div className={styles.dropDownContainer}>
           <NamedDropdown
+            isEditModeAllowed={od.editMode}
             onChange={(e) => dropdownChangeHandler(e, od.id, "size")}
-            name="SIZE"
+            name="Размер"
             options={od.sizes}
             chosenValue={od.chosenSize.label}
           />
           <NamedDropdown
+            isEditModeAllowed={od.editMode}
             onChange={(e) => dropdownChangeHandler(e, od.id, "color")}
-            name="COLOR"
+            name="Цвет"
             options={od.colors}
             chosenValue={od.chosenColor.label}
           />
           <NamedDropdown
+            isEditModeAllowed={od.editMode}
             onChange={(e) => dropdownChangeHandler(e, od.id, "count")}
-            name="COUNT"
+            name="Количество"
             options={od.counts}
             chosenValue={od.chosenCount.label}
           />
         </div>
-        <Link to={"#"} className={styles.EditLink}>
-          Редактировать дополнительные характеристики
-        </Link>
+        <button
+          className={styles.EditToggler}
+          onClick={() => toggleEditMode(od.id)}
+        >
+          {!od.editMode
+            ? "Редактировать дополнительные характеристики"
+            : "Зберегти"}
+        </button>
         <div className={styles.AdditionalFeatures}>
           {od.additionalFeatures.selectedOptions.length ? (
             od.additionalFeatures.selectedOptions.map((feature, index) => (
@@ -80,22 +80,18 @@ const Order = (props) => {
                 description={feature.description}
                 key={feature.name + "." + index}
                 options={feature.options ? feature.options : []}
-              >
-                Feature
-              </NamedDropdown>
+              ></NamedDropdown>
             ))
           ) : (
             <NamedDropdown
               name=""
-              description={"Дополнительне"}
+              description={"Дополнительне характеристики..."}
               options={
                 od.additionalFeatures.options
                   ? od.additionalFeatures.options
                   : []
               }
-            >
-              Feature
-            </NamedDropdown>
+            ></NamedDropdown>
           )}
         </div>
         <div className={styles.Commentaries}>
@@ -119,6 +115,7 @@ const Order = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   changeOnDropdown: (orderId, newData, type) =>
     dispatch(action.changeOnDropdown(orderId, newData, type)),
+  toggleEditMode: (orderId) => dispatch(action.toggleEditMode(orderId)),
 });
 
 export default connect(null, mapDispatchToProps)(Order);
