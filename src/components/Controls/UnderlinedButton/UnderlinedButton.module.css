@@ -1,0 +1,25 @@
+.UnderlinedButton {
+  cursor: pointer;
+  border: none;
+  border-bottom: solid 2px #000;
+  background-color: transparent;
+  text-transform: uppercase;
+  padding: 0;
+  font-size: 14px;
+  transition: border-bottom 0.1s;
+}
+.UnderlinedButton:hover {
+  border-bottom: solid 2px rgba(0, 0, 0, 0.3);
+}
+
+.Right {
+  margin-left: auto;
+}
+
+.Left {
+  margin-right: auto;
+}
+
+.MarginTop {
+  margin-top: 15px;
+}

@@ -1,0 +1,42 @@
+.CartMenu {
+  display: flex;
+  padding-bottom: 0.859vw;
+  margin-bottom: 2.422vw;
+
+  grid-column: 1/9;
+  height: fit-content;
+
+  font-size: 14px;
+  border-bottom: 1px solid #000;
+}
+
+.CartMenu .Button {
+  border: none;
+
+  margin-right: 20px;
+  background-color: transparent;
+
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  /* font-size: 1.094vw;
+    line-height: 1.25vw; */
+  color: #000;
+
+  text-transform: uppercase;
+}
+
+.CartMenu .Button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.CartMenu .Button:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 767px) {
+  .CartMenu {
+    grid-column: 1/13;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+  }
+}

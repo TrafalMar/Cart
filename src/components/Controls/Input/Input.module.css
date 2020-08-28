@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;1,100&display=swap");
+.NamedInput {
+  display: flex;
+  border-bottom: solid 1px #000;
+  padding: 0.781vw 0 0.781vw;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.NamedInput input {
+  width: 100%;
+  /* font-size: 1.094vw;
+  line-height: 1.875vw; */
+  font-size: 14px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+}
+
+.NamedInput input:focus {
+  outline: none;
+}
+
+.NamedInput input::placeholder {
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.NamedInput label {
+  /* font-size: 1.094vw;
+  line-height: 1.875vw; */
+  font-size: 14px;
+  margin-right: 10px;
+  text-transform: uppercase;
+}

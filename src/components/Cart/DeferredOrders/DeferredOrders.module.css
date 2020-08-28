@@ -1,0 +1,11 @@
+.DeferredOrders {
+  grid-column: 1/9;
+  /* background-color: rgba(0, 0, 0, 0.1); */
+}
+
+@media screen and (max-width: 767px) {
+  .DeferredOrders {
+    grid-column: 1/13;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+  }
+}
