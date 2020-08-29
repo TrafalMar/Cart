@@ -54,7 +54,7 @@ const Summarizer = (props) => {
           )
       )}
       <div className={styles.Summary}>
-        <span>ВСЕГО:</span>
+        <span className={styles.Total}>ВСЕГО:</span>
         <span className={styles.SumPrice}>
           <span style={{ paddingRight: "10px" }}>₴</span>
           {orders.reduce((sum, cur) => {

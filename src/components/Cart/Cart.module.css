@@ -6,8 +6,19 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(3, auto);
 
-  padding: 3.611vw 6.944vw 11.389vw;
-  box-sizing: border-box;
+  padding: 4rem 6rem 11rem;
   /* background-color: rgba(0, 0, 0, 0.1); */
-  column-gap: 5vw;
+  column-gap: 4rem;
+}
+
+@media screen and (max-width: 767px) {
+  .Cart {
+    padding: 4rem 2rem 11rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .Cart {
+    padding: 4rem 1rem 11rem;
+  }
 }

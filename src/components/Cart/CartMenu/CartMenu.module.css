@@ -1,23 +1,23 @@
 .CartMenu {
   display: flex;
-  padding-bottom: 0.859vw;
-  margin-bottom: 2.422vw;
-
   grid-column: 1/9;
   height: fit-content;
 
-  font-size: 14px;
-  border-bottom: 1px solid #000;
+  padding-bottom: 1.2rem;
+  margin-bottom: 2.4rem;
+
+  font-size: 1.4rem;
+  border-bottom: 0.1rem solid #000;
 }
 
 .CartMenu .Button {
   border: none;
 
-  margin-right: 20px;
+  margin-right: 2rem;
   background-color: transparent;
 
   font-family: "Raleway", sans-serif;
-  font-size: 14px;
+  font-size: 1.4rem;
   /* font-size: 1.094vw;
     line-height: 1.25vw; */
   color: #000;
@@ -28,11 +28,15 @@
 
 .CartMenu .Button:hover {
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .CartMenu .Button:focus {
   outline: none;
+  text-decoration: none;
+}
+
+.CartMenu .Active {
+  font-weight: bold;
 }
 
 @media screen and (max-width: 767px) {
