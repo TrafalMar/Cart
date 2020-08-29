@@ -32,6 +32,8 @@
 }
 
 .Order .InfoSection {
+  display: flex;
+  flex-direction: column;
   grid-column: 2/5;
 }
 
@@ -162,7 +164,8 @@
 
 .Order .OrderFooter {
   display: flex;
-  margin-top: 3rem;
+  padding-top: 2rem;
+  margin-top: auto;
   justify-content: space-between;
 }
 
