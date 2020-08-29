@@ -2,10 +2,17 @@ import React from "react";
 import styles from "./Input.module.css";
 
 const NamedInput = (props) => {
+  const { name, value, orderId, onChange, isEditModeAllowed } = props;
+
   return (
     <div className={styles.NamedInput}>
-      <label>{props.name ? props.name + ":" : null}</label>
-      <input {...props} name={props.name} value={props.value} />
+      <label>{name ? name + ":" : null}</label>
+      <input
+        disabled={isEditModeAllowed !== undefined ? !isEditModeAllowed : false}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 };

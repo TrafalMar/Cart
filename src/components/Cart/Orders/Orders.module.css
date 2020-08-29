@@ -1,6 +1,7 @@
 .Orders {
   grid-column: 1/9;
   grid-row: 2/3;
+  backface-visibility: hidden;
   /* background-color: rgba(0, 0, 0, 0.1); */
 }
 

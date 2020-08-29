@@ -21,10 +21,10 @@ const Cart = (props) => {
   return (
     <div className={styles.Cart}>
       <CartMenu cart={{ activeOrdersCount, deferredOrdersCount }} />
-      <Route path="/cart/orders" component={() => <Orders orders={orders} />} />
+      <Route path="/cart/orders" render={() => <Orders orders={orders} />} />
       <Route
         path="/cart/deferred"
-        component={() => <DeferredOrders orders={orders} />}
+        render={() => <DeferredOrders orders={orders} />}
       />
     </div>
   );

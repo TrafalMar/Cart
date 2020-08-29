@@ -31,24 +31,6 @@ const Summarizer = (props) => {
     };
   }, []);
 
-  const countOrderPrice = (order) => {
-    let price = parseInt(order.price);
-
-    if (order.chosenSize.value) {
-      price = parseInt(order.chosenSize.value);
-    }
-
-    if (order.chosenColor.value) {
-      price += parseInt(order.chosenColor.value);
-    }
-
-    if (order.chosenCount && order.chosenCount.value) {
-      price *= order.chosenCount.value;
-    }
-
-    return price;
-  };
-
   const { orders } = props;
   return (
     <div className={styles.Summarizer}>
@@ -58,7 +40,7 @@ const Summarizer = (props) => {
       {orders.map(
         (order) =>
           !order.isDeferred && (
-            <div key={order.name} className={styles.SummarizeItem}>
+            <div key={order.id} className={styles.SummarizeItem}>
               <div className={styles.Name}>
                 {order.name}{" "}
                 {order.chosenCount.value > 1 ? (
@@ -67,7 +49,7 @@ const Summarizer = (props) => {
                   </span>
                 ) : null}
               </div>
-              <div className={styles.Price}>₴{countOrderPrice(order)}</div>
+              <div className={styles.Price}>₴{order.price}</div>
             </div>
           )
       )}
@@ -76,9 +58,8 @@ const Summarizer = (props) => {
         <span className={styles.SumPrice}>
           <span style={{ paddingRight: "10px" }}>₴</span>
           {orders.reduce((sum, cur) => {
-            let price = countOrderPrice(cur);
             if (!cur.isDeferred) {
-              return sum + price;
+              return sum + cur.price;
             }
             return sum;
           }, 0)}

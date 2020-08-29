@@ -20,32 +20,53 @@ const countOrders = (newOrders) => {
 };
 
 const countSinglePrice = (order) => {
-  let price = order.price;
+  let price = 0;
 
-  if (order.chosenSize.value) {
-    price = parseInt(order.chosenSize.value);
+  if (order.chosenSize.data) {
+    price = parseInt(order.chosenSize.data);
+  } else {
+    price = parseInt(order.defaultPrice);
   }
 
-  if (order.chosenColor.value) {
-    price += parseInt(order.chosenColor.value);
+  if (order.chosenColor.data) {
+    price += parseInt(order.chosenColor.data);
   }
 
-  if (order.chosenCount && order.chosenCount.value) {
-    price *= order.chosenCount.value;
+  if (order.selectedCharacteristics.length) {
+    for (let char of order.selectedCharacteristics) {
+      price += parseInt(char.data);
+    }
   }
-  return price;
+
+  if (order.chosenCount && order.chosenCount.data) {
+    price *= order.chosenCount.data;
+  }
+
+  return Math.floor(price);
 };
 
-const recountPrice = (state, orderId) => {
+const recalculatePrice = (state, action) => {
+  const { orderId } = action;
+
   let newOrders = [...state.orders];
 
-  const order = newOrders.find((order) => order.id === orderId);
+  let price = 0;
 
-  let price = countSinglePrice(order);
+  if (orderId !== undefined) {
+    const order = newOrders.find((order) => order.id === orderId);
 
-  newOrders.find((order) => order.id === orderId).price = price;
+    price = countSinglePrice(order);
 
-  return newOrders;
+    newOrders.find((order) => order.id === orderId).price = price;
+  } else {
+    for (let order of newOrders) {
+      price = countSinglePrice(order);
+
+      order.price = price;
+    }
+  }
+
+  return { ...state, orders: newOrders };
 };
 
 const setCart = (state, action) => {
@@ -71,7 +92,6 @@ const removeOrder = (state, action) => {
     ...state,
     orders: newOrders,
     ...countOrders(newOrders),
-    ...recountPrice(state, orderId),
   };
 };
 
@@ -83,16 +103,26 @@ const changeOnDropdown = (state, action) => {
   const { orderId, chosenData, chosenType } = action;
 
   let newOrders = [...state.orders];
-
+  const order = newOrders.find((order) => order.id === orderId);
+  let selectionData = null;
   switch (chosenType) {
     case "size":
-      newOrders.find((order) => order.id === orderId).chosenSize = chosenData;
+      selectionData = order.sizes.find(
+        (size) => size.value === chosenData.value
+      ).data;
+      order.chosenSize = { ...chosenData, data: selectionData };
       break;
     case "color":
-      newOrders.find((order) => order.id === orderId).chosenColor = chosenData;
+      selectionData = order.colors.find(
+        (color) => color.value === chosenData.value
+      ).data;
+      order.chosenColor = { ...chosenData, data: selectionData };
       break;
     case "count":
-      newOrders.find((order) => order.id === orderId).chosenCount = chosenData;
+      selectionData = order.counts.find(
+        (count) => count.value === chosenData.value
+      ).data;
+      order.chosenCount = { ...chosenData, data: selectionData };
       break;
     default:
       break;
@@ -102,7 +132,6 @@ const changeOnDropdown = (state, action) => {
     ...state,
     orders: newOrders,
     ...countOrders(newOrders),
-    ...recountPrice(state, orderId),
   };
 };
 
@@ -117,6 +146,74 @@ const toggleEditMode = (state, action) => {
   return { ...state, orders: newOrders };
 };
 
+const addCharacteristic = (state, action) => {
+  const { orderId, chosenData } = action;
+
+  let newOrders = [...state.orders];
+  const order = newOrders.find((order) => order.id === orderId);
+
+  const selectionData = order.additionalCharacteristics.find(
+    (addChar) => addChar.value === chosenData.value
+  ).data;
+
+  const newChar = { ...chosenData, data: selectionData };
+
+  let isNotDublicate = 1;
+
+  for (let char of order.selectedCharacteristics) {
+    if (char.value === newChar.value) {
+      isNotDublicate *= 0;
+    }
+  }
+
+  if (isNotDublicate) {
+    order.selectedCharacteristics.unshift(newChar);
+  }
+
+  return { ...state, orders: newOrders };
+};
+
+const editCharacteristic = (state, action) => {
+  const { orderId, charId, chosenData } = action;
+
+  let newOrders = [...state.orders];
+  const order = newOrders.find((order) => order.id === orderId);
+
+  const selectionData = order.additionalCharacteristics.find(
+    (addChar) => addChar.value === chosenData.value
+  ).data;
+
+  const newChar = { ...chosenData, data: selectionData };
+
+  let isNotDuplicate = 1;
+
+  for (let char of order.selectedCharacteristics) {
+    if (char.value === newChar.value) {
+      isNotDuplicate *= 0;
+    }
+  }
+
+  if (isNotDuplicate) {
+    order.selectedCharacteristics = order.selectedCharacteristics.filter(
+      (char) => char.value !== charId
+    );
+    order.selectedCharacteristics.unshift(newChar);
+  } else {
+    console.log("There is duplicate");
+  }
+
+  return { ...state, orders: newOrders };
+};
+
+const changeCommentaries = (state, action) => {
+  const { orderId, input } = action;
+  const newOrders = [...state.orders];
+
+  newOrders.find((order) => order.id === orderId).commentaries = input;
+
+  return { ...state, orders: [...newOrders] };
+};
+
 const Cart = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_CART:
@@ -129,6 +226,12 @@ const Cart = (state = initialState, action) => {
       return changeOnDropdown(state, action);
     case actionTypes.TOGGLE_EDIT_MODE:
       return toggleEditMode(state, action);
+    case actionTypes.EDIT_CHARACTERISTIC:
+      return editCharacteristic(state, action);
+    case actionTypes.CHANGE_COMMENTARIES:
+      return changeCommentaries(state, action);
+    case actionTypes.RECALCULATE_PRICE:
+      return recalculatePrice(state, action);
     default:
       return state;
   }

@@ -4,24 +4,23 @@ import { Arrow } from "../../../assets/icons";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-let options = [];
-
 const NamedDropdown = (props) => {
-  if (props.options && props.options) {
-    options = props.options;
-  }
+  const {
+    isEditModeAllowed,
+    name,
+    options,
+    onChange,
+    description,
+    chosenValue,
+  } = props;
 
-  const defaultValue = props.options[0];
+  const defaultValue = options[0];
   return (
     <div className={styles.NamedDropdown}>
-      {props.name && <span className={styles.Name}>{props.name + " :"}</span>}
+      {name && <span className={styles.Name}>{name + " :"}</span>}
       <Dropdown
-        disabled={
-          props.isEditModeAllowed !== undefined
-            ? !props.isEditModeAllowed
-            : false
-        }
-        onChange={props.onChange}
+        disabled={isEditModeAllowed !== undefined ? !isEditModeAllowed : false}
+        onChange={onChange}
         className={styles.Root}
         controlClassName={styles.Control}
         placeholderClassName={styles.Placeholder}
@@ -45,10 +44,10 @@ const NamedDropdown = (props) => {
         }
         options={options}
         value={
-          props.chosenValue
-            ? props.chosenValue + ""
-            : props.description
-            ? props.description
+          chosenValue
+            ? chosenValue + ""
+            : description
+            ? description
             : defaultValue
         }
         placeholder=". . ."

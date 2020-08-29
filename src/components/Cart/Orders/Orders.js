@@ -19,16 +19,17 @@ function Orders(props) {
   return (
     <Aux>
       <div className={styles.Orders}>
-        {orders.map(
-          (order) =>
+        {orders.map((order) => {
+          return (
             !order.isDeferred && (
               <Order
-                key={order.id}
+                key={order.id + order.name}
                 onRemove={() => removeOrder(order.id)}
                 orderData={order}
               />
             )
-        )}
+          );
+        })}
       </div>
       <div className={styles.Info}>
         <Summarizer orders={orders} />

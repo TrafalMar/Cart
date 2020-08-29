@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Order.module.css";
 
 import { FaTimes } from "react-icons/fa";
@@ -12,7 +12,15 @@ import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/Index";
 
 const Order = (props) => {
-  const { orderData: od, onRemove, changeOnDropdown, toggleEditMode } = props;
+  const {
+    orderData: od,
+    onRemove,
+    changeOnDropdown,
+    toggleEditMode,
+    // addCharacteristic,
+    editCharacteristic,
+    changeCommentaries,
+  } = props;
 
   const dropdownChangeHandler = (e, orderId, type) => {
     const chosenData = { label: e.label, value: e.value };
@@ -22,13 +30,12 @@ const Order = (props) => {
   return (
     <div className={styles.Order}>
       <div className={styles.imageSection}>
-        <img className={styles.Img} alt={od.name} src={od.image}></img>
+        <img className={styles.Img} alt={od.id} src={od.image}></img>
       </div>
       <div className={styles.InfoSection}>
         <div className={styles.PollardiSection}>
           <span>{od.type}</span>
           <span className={styles.LongDash} />
-          {/* <span style={{ padding: "0 10px" }}> --- </span> */}
           <span>{od.typeValue}</span>
           <button
             onClick={onRemove}
@@ -42,27 +49,35 @@ const Order = (props) => {
           <div className={styles.Price}>₴{od.price}</div>
         </div>
         <div className={styles.dropDownContainer}>
-          <NamedDropdown
-            isEditModeAllowed={od.editMode}
-            onChange={(e) => dropdownChangeHandler(e, od.id, "size")}
-            name="Размер"
-            options={od.sizes}
-            chosenValue={od.chosenSize.label}
-          />
-          <NamedDropdown
-            isEditModeAllowed={od.editMode}
-            onChange={(e) => dropdownChangeHandler(e, od.id, "color")}
-            name="Цвет"
-            options={od.colors}
-            chosenValue={od.chosenColor.label}
-          />
-          <NamedDropdown
-            isEditModeAllowed={od.editMode}
-            onChange={(e) => dropdownChangeHandler(e, od.id, "count")}
-            name="Количество"
-            options={od.counts}
-            chosenValue={od.chosenCount.label}
-          />
+          {od.sizes.length !== 0 && (
+            <NamedDropdown
+              isEditModeAllowed={od.editMode}
+              onChange={(e) => dropdownChangeHandler(e, od.id, "size")}
+              name="Размер"
+              options={od.sizes}
+              chosenValue={od.chosenSize.label}
+            />
+          )}
+
+          {od.colors.length !== 0 && (
+            <NamedDropdown
+              isEditModeAllowed={od.editMode}
+              onChange={(e) => dropdownChangeHandler(e, od.id, "color")}
+              name="Цвет"
+              options={od.colors}
+              chosenValue={od.chosenColor.label}
+            />
+          )}
+
+          {od.counts.length !== 0 && (
+            <NamedDropdown
+              isEditModeAllowed={od.editMode}
+              onChange={(e) => dropdownChangeHandler(e, od.id, "count")}
+              name="Количество"
+              options={od.counts}
+              chosenValue={od.chosenCount.label}
+            />
+          )}
         </div>
         <button
           className={styles.EditToggler}
@@ -70,32 +85,33 @@ const Order = (props) => {
         >
           {!od.editMode
             ? "Редактировать дополнительные характеристики"
-            : "Зберегти"}
+            : "Сохранить"}
         </button>
         <div className={styles.AdditionalFeatures}>
-          {od.additionalFeatures.selectedOptions.length ? (
-            od.additionalFeatures.selectedOptions.map((feature, index) => (
+          {/* <NamedDropdown
+            onChange={(e) => addCharacteristic(od.id, e)}
+            description="Дополнительные характеристики"
+            options={od.additionalCharacteristics}
+          /> */}
+          {od.selectedCharacteristics.map((char) => {
+            return (
               <NamedDropdown
-                name={feature.name}
-                description={feature.description}
-                key={feature.name + "." + index}
-                options={feature.options ? feature.options : []}
-              ></NamedDropdown>
-            ))
-          ) : (
-            <NamedDropdown
-              name=""
-              description={"Дополнительне характеристики..."}
-              options={
-                od.additionalFeatures.options
-                  ? od.additionalFeatures.options
-                  : []
-              }
-            ></NamedDropdown>
-          )}
+                isEditModeAllowed={od.editMode}
+                key={char.value}
+                onChange={(event) =>
+                  editCharacteristic(od.id, char.value, event)
+                }
+                options={od.additionalCharacteristics}
+                chosenValue={char.label}
+              />
+            );
+          })}
         </div>
         <div className={styles.Commentaries}>
           <NamedInput
+            isEditModeAllowed={od.editMode}
+            orderId={od.id}
+            onChange={(e) => changeCommentaries(od.id, e.target.value)}
             name="Комментарий"
             placeholder="Ваш коментарий"
             value={od.commentaries}
@@ -105,7 +121,9 @@ const Order = (props) => {
           <div className={styles.attachmentsSection}>
             <button className={styles.IconButton}>{paperClip}</button>
           </div>
-          <UnderlinedButton position="right">Отложить покупку</UnderlinedButton>
+          <UnderlinedButton position="right">
+            {!od.isDeferred ? "Отложить покупку" : "Вернуть в корзину"}
+          </UnderlinedButton>
         </div>
       </div>
     </div>
@@ -116,6 +134,12 @@ const mapDispatchToProps = (dispatch) => ({
   changeOnDropdown: (orderId, newData, type) =>
     dispatch(action.changeOnDropdown(orderId, newData, type)),
   toggleEditMode: (orderId) => dispatch(action.toggleEditMode(orderId)),
+  addCharacteristic: (orderId, chosenData) =>
+    dispatch(action.addCharacteristic(orderId, chosenData)),
+  editCharacteristic: (orderId, charId, chosenData) =>
+    dispatch(action.editCharacteristic(orderId, charId, chosenData)),
+  changeCommentaries: (orderId, input) =>
+    dispatch(action.changeCommentaries(orderId, input)),
 });
 
 export default connect(null, mapDispatchToProps)(Order);
