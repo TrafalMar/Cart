@@ -4,6 +4,7 @@ import styles from "./UnderlinedButton.module.css";
 const UnderlinedButton = (props) => {
   let position = "";
   let marginTop = "";
+  const { onClick } = props;
 
   switch (props.position) {
     case "right":
@@ -20,7 +21,7 @@ const UnderlinedButton = (props) => {
   return (
     <button
       className={[styles.UnderlinedButton, position, marginTop].join(" ")}
-      onClick={props.onClick}
+      onClick={onClick}
     >
       {props.children}
     </button>

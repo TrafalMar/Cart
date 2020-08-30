@@ -6,8 +6,11 @@ const initialState = {
   deferredOrdersCount: 0,
 };
 
-const countOrders = (newOrders) => {
+const countOrders = (state, action) => {
   let activeOrdersCount = 0;
+
+  let newOrders = [...state.orders];
+
   for (let order of newOrders) {
     activeOrdersCount = !order.isDeferred
       ? activeOrdersCount + 1
@@ -16,7 +19,7 @@ const countOrders = (newOrders) => {
 
   const deferredOrdersCount = newOrders.length - activeOrdersCount;
 
-  return { activeOrdersCount, deferredOrdersCount };
+  return { ...state, activeOrdersCount, deferredOrdersCount };
 };
 
 const countSinglePrice = (order) => {
@@ -78,7 +81,7 @@ const setCart = (state, action) => {
     order.price = countSinglePrice(order);
   }
 
-  return { orders: newOrders, ...countOrders(orders) };
+  return { orders: newOrders };
 };
 
 const removeOrder = (state, action) => {
@@ -91,7 +94,6 @@ const removeOrder = (state, action) => {
   return {
     ...state,
     orders: newOrders,
-    ...countOrders(newOrders),
   };
 };
 
@@ -131,7 +133,6 @@ const changeOnDropdown = (state, action) => {
   return {
     ...state,
     orders: newOrders,
-    ...countOrders(newOrders),
   };
 };
 
@@ -214,6 +215,17 @@ const changeCommentaries = (state, action) => {
   return { ...state, orders: [...newOrders] };
 };
 
+const toggleDeffereOrder = (state, action) => {
+  const { orderId, input } = action;
+  const newOrders = [...state.orders];
+
+  const order = newOrders.find((order) => order.id === orderId);
+
+  order.isDeferred = !order.isDeferred;
+
+  return { ...state, orders: [...newOrders] };
+};
+
 const Cart = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_CART:
@@ -232,6 +244,10 @@ const Cart = (state = initialState, action) => {
       return changeCommentaries(state, action);
     case actionTypes.RECALCULATE_PRICE:
       return recalculatePrice(state, action);
+    case actionTypes.TOGGLE_DIFFERE_ORDER:
+      return toggleDeffereOrder(state, action);
+    case actionTypes.COUNT_ORDERS:
+      return countOrders(state, action);
     default:
       return state;
   }

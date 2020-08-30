@@ -9,12 +9,7 @@ import Summarizer from "./../Summarizer/Summarizer";
 import Aux from "../../../hoc/_aux";
 
 function Orders(props) {
-  const { orders, removeOrder } = props;
-  // const [scrollOffset, setScrollOffset] = useState(window.pageYOffset);
-
-  useEffect(() => {
-    // window.scrollTo(0, scrollOffset);
-  }, []);
+  const { orders, removeOrder, toggleDeffereOrder } = props;
 
   return (
     <Aux>
@@ -26,6 +21,7 @@ function Orders(props) {
                 key={order.id + order.name}
                 onRemove={() => removeOrder(order.id)}
                 orderData={order}
+                onDeffereToggle={() => toggleDeffereOrder(order.id)}
               />
             )
           );
@@ -40,6 +36,7 @@ function Orders(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   removeOrder: (orderId) => dispatch(action.removeOrder(orderId)),
+  toggleDeffereOrder: (orderId) => dispatch(action.toggleDeffereOrder(orderId)),
 });
 
 export default connect(null, mapDispatchToProps)(Orders);

@@ -8,7 +8,6 @@ import NamedDropdown from "../../Controls/NamedDropdown/NamedDropdown";
 import NamedInput from "../../Controls/Input/Input";
 import UnderlinedButton from "../../Controls/UnderlinedButton/UnderlinedButton";
 import Attachments from "./Attachments/Attachments";
-import Loader from "../../Loader/Loader";
 
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/Index";
@@ -22,6 +21,7 @@ const Order = (props) => {
     // addCharacteristic,
     editCharacteristic,
     changeCommentaries,
+    onDeffereToggle,
   } = props;
 
   const dropdownChangeHandler = (e, orderId, type) => {
@@ -121,7 +121,7 @@ const Order = (props) => {
         </div>
         <Attachments isEditModeAllowed={od.editMode} orderId={od.id} />
         <div className={styles.OrderFooter}>
-          <UnderlinedButton position="right">
+          <UnderlinedButton onClick={onDeffereToggle} position="right">
             {!od.isDeferred ? "Отложить покупку" : "Вернуть в корзину"}
           </UnderlinedButton>
         </div>

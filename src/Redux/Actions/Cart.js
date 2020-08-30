@@ -6,12 +6,16 @@ export const setOrders = (orders) => (dispatch) => {
     orders,
   });
   dispatch(recalculatePrice());
+  dispatch(countOrders());
 };
 
-export const removeOrder = (orderId) => ({
-  type: actionTypes.REMOVE_ORDER,
-  orderId,
-});
+export const removeOrder = (orderId) => (dispatch) => {
+  dispatch({
+    type: actionTypes.REMOVE_ORDER,
+    orderId,
+  });
+  dispatch(countOrders());
+};
 
 export const defferOrder = (orderId) => ({
   type: actionTypes.DEFFER_ORDER,
@@ -61,3 +65,13 @@ const recalculatePrice = (orderId) => ({
   type: actionTypes.RECALCULATE_PRICE,
   orderId,
 });
+
+const countOrders = () => ({
+  type: actionTypes.COUNT_ORDERS,
+});
+
+export const toggleDeffereOrder = (orderId) => (dispatch) => {
+  dispatch({ type: actionTypes.TOGGLE_DIFFERE_ORDER, orderId });
+  dispatch(recalculatePrice(orderId));
+  dispatch(countOrders());
+};

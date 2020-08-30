@@ -7,4 +7,5 @@ export {
   addCharacteristic,
   editCharacteristic,
   changeCommentaries,
+  toggleDeffereOrder,
 } from "./Cart";

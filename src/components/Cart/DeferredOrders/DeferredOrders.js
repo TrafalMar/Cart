@@ -7,7 +7,7 @@ import * as action from "../../../Redux/Actions/Index";
 import Order from "./../Order/Order";
 
 function DeferredOrders(props) {
-  const { orders, removeOrder } = props;
+  const { orders, removeOrder, toggleDeffereOrder } = props;
 
   return (
     <div className={styles.DeferredOrders}>
@@ -17,6 +17,7 @@ function DeferredOrders(props) {
             <Order
               key={order.id}
               onRemove={() => removeOrder(order.id)}
+              onDeffereToggle={() => toggleDeffereOrder(order.id)}
               orderData={order}
             />
           )
@@ -28,6 +29,7 @@ function DeferredOrders(props) {
 const mapDispatchToProps = (dispatch) => ({
   removeOrder: (orderId, destination) =>
     dispatch(action.removeOrder(orderId, destination)),
+  toggleDeffereOrder: (orderId) => dispatch(action.toggleDeffereOrder(orderId)),
 });
 
 export default connect(null, mapDispatchToProps)(DeferredOrders);
