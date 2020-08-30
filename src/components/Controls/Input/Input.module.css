@@ -1,17 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;1,100&display=swap");
 .NamedInput {
   display: flex;
-  border-bottom: solid 1px #000;
-  padding: 0.781vw 0 0.781vw;
-  margin-bottom: 15px;
+  border-bottom: solid 0.1rem #000;
+  padding: 0.8rem 0 0.8rem;
+  margin-bottom: 1.4rem;
   align-items: center;
+  user-select: none;
 }
 
 .NamedInput input {
   width: 100%;
   /* font-size: 1.094vw;
   line-height: 1.875vw; */
-  font-size: 14px;
+  font-size: 1.4rem;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   background-color: transparent;
@@ -30,7 +31,7 @@
 .NamedInput label {
   /* font-size: 1.094vw;
   line-height: 1.875vw; */
-  font-size: 14px;
-  margin-right: 10px;
+  font-size: 1.4rem;
+  margin-right: 1rem;
   text-transform: uppercase;
 }

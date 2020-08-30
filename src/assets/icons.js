@@ -30,20 +30,42 @@ export const Arrow = (
   </svg>
 );
 
-export const Times = (
+export const TimesLight = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="17"
     viewBox="0 0 16 17"
-    fill="none"
+    stroke="#BEBEBE"
   >
     <line
       y1="-0.5"
       x2="20.7628"
       y2="-0.5"
       transform="matrix(0.715208 -0.698911 0.715208 0.698911 1 16)"
-      stroke="#121212"
+    ></line>
+    <line
+      y1="-0.5"
+      x2="20.7628"
+      y2="-0.5"
+      transform="matrix(-0.715208 -0.698911 0.715208 -0.698911 16 15.5115)"
+    ></line>
+  </svg>
+);
+
+export const TimesNormal = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="17"
+    viewBox="0 0 16 17"
+    stroke="#000"
+  >
+    <line
+      y1="-0.5"
+      x2="20.7628"
+      y2="-0.5"
+      transform="matrix(0.715208 -0.698911 0.715208 0.698911 1 16)"
     ></line>
     <line
       y1="-0.5"

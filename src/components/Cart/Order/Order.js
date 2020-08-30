@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Order.module.css";
 
 import { FaTimes } from "react-icons/fa";
-import { paperClip } from "../../../assets/icons";
+import { TimesLight, TimesNormal } from "../../../assets/icons";
 
 import NamedDropdown from "../../Controls/NamedDropdown/NamedDropdown";
 import NamedInput from "../../Controls/Input/Input";
 import UnderlinedButton from "../../Controls/UnderlinedButton/UnderlinedButton";
+import Attachments from "./Attachments/Attachments";
+import Loader from "../../Loader/Loader";
 
 import { connect } from "react-redux";
 import * as action from "../../../Redux/Actions/Index";
@@ -41,7 +43,7 @@ const Order = (props) => {
             onClick={onRemove}
             className={[styles.CloseButton, styles.IconButton].join(" ")}
           >
-            <FaTimes />
+            {TimesLight}
           </button>
         </div>
         <div className={styles.NamePriceContainer}>
@@ -117,10 +119,8 @@ const Order = (props) => {
             value={od.commentaries}
           />
         </div>
+        <Attachments isEditModeAllowed={od.editMode} orderId={od.id} />
         <div className={styles.OrderFooter}>
-          <div className={styles.attachmentsSection}>
-            <button className={styles.IconButton}>{paperClip}</button>
-          </div>
           <UnderlinedButton position="right">
             {!od.isDeferred ? "Отложить покупку" : "Вернуть в корзину"}
           </UnderlinedButton>

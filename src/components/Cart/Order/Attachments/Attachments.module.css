@@ -1,0 +1,91 @@
+.Attachments {
+  display: flex;
+  max-width: 68.5rem;
+}
+
+.Attachments .IconButton {
+  display: flex;
+  align-items: flex-start;
+
+  cursor: pointer;
+  min-height: 2.6rem;
+
+  /* padding: 0.5rem; */
+  margin-right: 2rem;
+
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+
+.Attachments .IconButton:focus {
+  outline: none;
+}
+
+.Attachments .ImagesContainer {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.Attachments .ImageItem {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  font-size: 1.4rem;
+}
+
+.Attachments .ImageItem .DeleteButton {
+  border: none;
+  background: none;
+
+  font-weight: bold;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.Attachments .ImageItem .DeleteButton svg {
+  height: 0.8rem;
+}
+.Attachments .ImageItem .DeleteButton:hover svg {
+  height: 1rem;
+}
+
+.Attachments .ImageItem .DeleteButton:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.Attachments .ImageItem .ImageName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+  cursor: help;
+}
+
+.Attachments .ImageItem .ImageName:hover ~ .UploadedImage {
+  display: block;
+}
+
+.Attachments .ImageItem .UploadedImage {
+  display: none;
+  position: absolute;
+  top: 100%;
+  margin-top: 0.1rem;
+  height: 20rem;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+  z-index: 1000;
+}
+
+@media screen and (max-width: 767px) {
+  .Attachments .ImageItem .ImageName:hover ~ .UploadedImage {
+    display: none;
+  }
+  .Attachments {
+    margin-top: 3rem;
+  }
+}

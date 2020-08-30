@@ -25,6 +25,12 @@ code {
     monospace;
 }
 
+@media screen and (max-width: 1085px) {
+  html {
+    font-size: 54.5%;
+  }
+}
+
 @media screen and (max-width: 767px) {
   html {
     font-size: 48.5%;

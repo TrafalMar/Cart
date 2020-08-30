@@ -8,9 +8,9 @@ const fixateOrderInfo = (fixator, offset = 0) => {
   let sticky = orderInfo.offsetTop;
 
   return function fixate() {
-    let condition = fixator.offsetTop + offset > sticky;
+    let condition = fixator.offsetTop > sticky;
     if (fixator.self === window) {
-      condition = fixator.pageYOffset + offset > orderInfo.offsetTop;
+      condition = fixator.pageYOffset + 30 > sticky;
     }
     if (condition && window.innerWidth > 767) {
       orderInfo.classList.add(styles.Sticky);

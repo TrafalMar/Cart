@@ -146,32 +146,32 @@ const toggleEditMode = (state, action) => {
   return { ...state, orders: newOrders };
 };
 
-const addCharacteristic = (state, action) => {
-  const { orderId, chosenData } = action;
+// const addCharacteristic = (state, action) => {
+//   const { orderId, chosenData } = action;
 
-  let newOrders = [...state.orders];
-  const order = newOrders.find((order) => order.id === orderId);
+//   let newOrders = [...state.orders];
+//   const order = newOrders.find((order) => order.id === orderId);
 
-  const selectionData = order.additionalCharacteristics.find(
-    (addChar) => addChar.value === chosenData.value
-  ).data;
+//   const selectionData = order.additionalCharacteristics.find(
+//     (addChar) => addChar.value === chosenData.value
+//   ).data;
 
-  const newChar = { ...chosenData, data: selectionData };
+//   const newChar = { ...chosenData, data: selectionData };
 
-  let isNotDublicate = 1;
+//   let isNotDublicate = 1;
 
-  for (let char of order.selectedCharacteristics) {
-    if (char.value === newChar.value) {
-      isNotDublicate *= 0;
-    }
-  }
+//   for (let char of order.selectedCharacteristics) {
+//     if (char.value === newChar.value) {
+//       isNotDublicate *= 0;
+//     }
+//   }
 
-  if (isNotDublicate) {
-    order.selectedCharacteristics.unshift(newChar);
-  }
+//   if (isNotDublicate) {
+//     order.selectedCharacteristics.unshift(newChar);
+//   }
 
-  return { ...state, orders: newOrders };
-};
+//   return { ...state, orders: newOrders };
+// };
 
 const editCharacteristic = (state, action) => {
   const { orderId, charId, chosenData } = action;
