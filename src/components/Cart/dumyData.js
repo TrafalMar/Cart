@@ -12,14 +12,14 @@ export const Orders = {
       type: "polardi",
       typeValue: "Grace of your love",
       sizes: [
-        { label: "Size 1", value: 1, data: "3000" },
-        { label: "Size 2", value: 2, data: "3500" },
-        { label: "Size 3", value: 3, data: "3700" },
+        { label: "Size 1 (3000)", value: 1, data: "3000" },
+        { label: "Size 2 (3500)", value: 2, data: "3500" },
+        { label: "Size 3 (3700)", value: 3, data: "3700" },
       ],
       colors: [
-        { label: "Color 1", value: 1, data: "100" },
-        { label: "Color 2", value: 2, data: "200" },
-        { label: "Color 3", value: 3, data: "300" },
+        { label: "Color 1 (100)", value: 1, data: "100" },
+        { label: "Color 2 (200)", value: 2, data: "200" },
+        { label: "Color 3 (300)", value: 3, data: "300" },
       ],
       counts: [
         { label: 1, value: 1, data: 1 },
@@ -27,15 +27,57 @@ export const Orders = {
         { label: 3, value: 3, data: 3 },
       ],
       additionalCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-        { label: "C наклейкой вышивки $(100)", value: 3, data: 100 },
+        {
+          label: "C вышивкой (100)",
+          value: 1,
+          data: { size: 1, price: "100" },
+        },
+        {
+          label: "C полувышивкой (200)",
+          value: 2,
+          data: { size: 1, price: "200" },
+        },
+        {
+          label: "C наклейкой вышивки (300)",
+          value: 3,
+          data: { size: 1, price: "300" },
+        },
+        {
+          label: "C вышивкой (1000)",
+          value: 4,
+          data: { size: 2, price: "1000" },
+        },
+        {
+          label: "C полувышивкой (1500)",
+          value: 5,
+          data: { size: 2, price: "1500" },
+        },
+        {
+          label: "C наклейкой вышивки (2000)",
+          value: 6,
+          data: { size: 2, price: "2000" },
+        },
+        {
+          label: "C вышивкой (500)",
+          value: 7,
+          data: { size: 3, price: "500" },
+        },
+        {
+          label: "C полувышивкой (600)",
+          value: 8,
+          data: { size: 3, price: "600" },
+        },
+        {
+          label: "C наклейкой вышивки (700)",
+          value: 9,
+          data: { size: 3, price: "700" },
+        },
       ],
-      selectedCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-      ],
-      chosenSize: { label: "Size 1", value: 1, data: "3000" },
-      chosenColor: { label: "Color 1", value: 1, data: "100" },
+
+      chosenCharacteristic: {},
+
+      chosenSize: { label: "Size 1 (3000)", value: 1, data: "3000" },
+      chosenColor: { label: "Color 1 (100)", value: 1, data: "100" },
       chosenCount: { label: 1, value: 1, data: 1 },
 
       commentaries: "бюст-85, талия-60, бедра-93",
@@ -62,14 +104,14 @@ export const Orders = {
       type: "polardi",
       typeValue: "Grace of your love",
       sizes: [
-        { label: "Size 1", value: 1, data: "3000" },
-        { label: "Size 2", value: 2, data: "3500" },
-        { label: "Size 3", value: 3, data: "3700" },
+        { label: "Size 1 (3000)", value: 1, data: "3000" },
+        { label: "Size 2 (3500)", value: 2, data: "3500" },
+        { label: "Size 3 (3700)", value: 3, data: "3700" },
       ],
       colors: [
-        { label: "Color 1", value: 1, data: "100" },
-        { label: "Color 2", value: 2, data: "200" },
-        { label: "Color 3", value: 3, data: "300" },
+        { label: "Color 1 (100)", value: 1, data: "100" },
+        { label: "Color 2 (200)", value: 2, data: "200" },
+        { label: "Color 3 (300)", value: 3, data: "300" },
       ],
       counts: [
         { label: 1, value: 1, data: 1 },
@@ -77,18 +119,58 @@ export const Orders = {
         { label: 3, value: 3, data: 3 },
       ],
       additionalCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-        { label: "C наклейкой вышивки $(100)", value: 3, data: 100 },
+        {
+          label: "C вышивкой (100)",
+          value: 1,
+          data: { size: 1, price: "100" },
+        },
+        {
+          label: "C полувышивкой (200)",
+          value: 2,
+          data: { size: 1, price: "200" },
+        },
+        {
+          label: "C наклейкой вышивки (300)",
+          value: 3,
+          data: { size: 1, price: "300" },
+        },
+        {
+          label: "C вышивкой (1000)",
+          value: 4,
+          data: { size: 2, price: "1000" },
+        },
+        {
+          label: "C полувышивкой (1500)",
+          value: 5,
+          data: { size: 2, price: "1500" },
+        },
+        {
+          label: "C наклейкой вышивки (2000)",
+          value: 6,
+          data: { size: 2, price: "2000" },
+        },
+        {
+          label: "C вышивкой (500)",
+          value: 7,
+          data: { size: 3, price: "500" },
+        },
+        {
+          label: "C полувышивкой (600)",
+          value: 8,
+          data: { size: 3, price: "600" },
+        },
+        {
+          label: "C наклейкой вышивки (700)",
+          value: 9,
+          data: { size: 3, price: "700" },
+        },
       ],
-      selectedCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-      ],
-      chosenSize: { label: "Size 1", value: 1, data: "3000" },
-      chosenColor: { label: "Color 1", value: 1, data: "100" },
-      chosenCount: { label: 1, value: 1, data: 1 },
 
+      chosenCharacteristic: {},
+
+      chosenSize: { label: "Size 1 (3000)", value: 1, data: "3000" },
+      chosenColor: { label: "Color 1 (100)", value: 1, data: "100" },
+      chosenCount: { label: 1, value: 1, data: 1 },
       commentaries: "Dame da ne Dame yo dame na no yo",
       attachments: [
         {
@@ -112,11 +194,15 @@ export const Orders = {
       price: 0,
       type: "polardi",
       typeValue: "Grace of your love",
-      sizes: [],
+      sizes: [
+        { label: "Size 1 (3000)", value: 1, data: "3000" },
+        { label: "Size 2 (3500)", value: 2, data: "3500" },
+        { label: "Size 3 (3700)", value: 3, data: "3700" },
+      ],
       colors: [
-        { label: "Color 1", value: 1, data: "100" },
-        { label: "Color 2", value: 2, data: "200" },
-        { label: "Color 3", value: 3, data: "300" },
+        { label: "Color 1 (100)", value: 1, data: "100" },
+        { label: "Color 2 (200)", value: 2, data: "200" },
+        { label: "Color 3 (300)", value: 3, data: "300" },
       ],
       counts: [
         { label: 1, value: 1, data: 1 },
@@ -124,18 +210,58 @@ export const Orders = {
         { label: 3, value: 3, data: 3 },
       ],
       additionalCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-        { label: "C наклейкой вышивки $(100)", value: 3, data: 100 },
+        {
+          label: "C вышивкой (100)",
+          value: 1,
+          data: { size: 1, price: "100" },
+        },
+        {
+          label: "C полувышивкой (200)",
+          value: 2,
+          data: { size: 1, price: "200" },
+        },
+        {
+          label: "C наклейкой вышивки (300)",
+          value: 3,
+          data: { size: 1, price: "300" },
+        },
+        {
+          label: "C вышивкой (1000)",
+          value: 4,
+          data: { size: 2, price: "1000" },
+        },
+        {
+          label: "C полувышивкой (1500)",
+          value: 5,
+          data: { size: 2, price: "1500" },
+        },
+        {
+          label: "C наклейкой вышивки (2000)",
+          value: 6,
+          data: { size: 2, price: "2000" },
+        },
+        {
+          label: "C вышивкой (500)",
+          value: 7,
+          data: { size: 3, price: "500" },
+        },
+        {
+          label: "C полувышивкой (600)",
+          value: 8,
+          data: { size: 3, price: "600" },
+        },
+        {
+          label: "C наклейкой вышивки (700)",
+          value: 9,
+          data: { size: 3, price: "700" },
+        },
       ],
-      selectedCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-      ],
-      chosenSize: {},
-      chosenColor: { label: "Color 1", value: 1, data: "100" },
-      chosenCount: { label: 1, value: 1, data: 1 },
 
+      chosenCharacteristic: {},
+
+      chosenSize: { label: "Size 1 (3000)", value: 1, data: "3000" },
+      chosenColor: { label: "Color 1 (100)", value: 1, data: "100" },
+      chosenCount: { label: 1, value: 1, data: 1 },
       commentaries: "Anta ga sukide sukisugite",
       attachments: [
         {
@@ -161,9 +287,9 @@ export const Orders = {
       typeValue: "Grace of your love",
       sizes: [],
       colors: [
-        { label: "Color 1", value: 1, data: "100" },
-        { label: "Color 2", value: 2, data: "200" },
-        { label: "Color 3", value: 3, data: "300" },
+        { label: "Color 1 (100)", value: 1, data: "100" },
+        { label: "Color 2 (200)", value: 2, data: "200" },
+        { label: "Color 3 (300)", value: 3, data: "300" },
       ],
       counts: [
         { label: 1, value: 1, data: 1 },
@@ -171,18 +297,28 @@ export const Orders = {
         { label: 3, value: 3, data: 3 },
       ],
       additionalCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-        { label: "C наклейкой вышивки $(100)", value: 3, data: 100 },
+        {
+          label: "C вышивкой (100)",
+          value: 1,
+          data: { size: 0, price: "100" },
+        },
+        {
+          label: "C полувышивкой (200)",
+          value: 2,
+          data: { size: 0, price: "200" },
+        },
+        {
+          label: "C наклейкой вышивки (300)",
+          value: 3,
+          data: { size: 0, price: "300" },
+        },
       ],
-      selectedCharacteristics: [
-        { label: "C вышивкой $(300)", value: 1, data: 300 },
-        { label: "C полувышивкой $(200)", value: 2, data: 200 },
-      ],
-      chosenSize: {},
-      chosenColor: { label: "Color 1", value: 1, data: "100" },
-      chosenCount: { label: 1, value: 1, data: 1 },
 
+      chosenCharacteristic: {},
+
+      chosenSize: { label: "Size 1 (3000)", value: 1, data: "3000" },
+      chosenColor: { label: "Color 1 (100)", value: 1, data: "100" },
+      chosenCount: { label: 1, value: 1, data: 1 },
       commentaries: "Yugamanai omoide ga baka mitai",
       attachments: [
         {

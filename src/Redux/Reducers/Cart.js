@@ -35,10 +35,8 @@ const countSinglePrice = (order) => {
     price += parseInt(order.chosenColor.data);
   }
 
-  if (order.selectedCharacteristics.length) {
-    for (let char of order.selectedCharacteristics) {
-      price += parseInt(char.data);
-    }
+  if (Object.entries(order.chosenCharacteristic).length !== 0) {
+    price += parseInt(order.chosenCharacteristic.data.price);
   }
 
   if (order.chosenCount && order.chosenCount.data) {
@@ -106,25 +104,43 @@ const changeOnDropdown = (state, action) => {
 
   let newOrders = [...state.orders];
   const order = newOrders.find((order) => order.id === orderId);
-  let selectionData = null;
+  let selection = null;
   switch (chosenType) {
     case "size":
-      selectionData = order.sizes.find(
-        (size) => size.value === chosenData.value
-      ).data;
-      order.chosenSize = { ...chosenData, data: selectionData };
+      selection = order.sizes.find((size) => size.value === chosenData.value);
+
+      // let firstCharacteristic = order.additionalCharacteristics.find(
+      //   (char) => char.data.size === selection.value
+      // );
+
+      order.chosenSize = { ...chosenData, data: selection.data };
+
+      // if (firstCharacteristic !== undefined) {
+      //   order.chosenCharacteristic = firstCharacteristic;
+      // }
+      order.chosenCharacteristic = {};
       break;
     case "color":
-      selectionData = order.colors.find(
+      selection = order.colors.find(
         (color) => color.value === chosenData.value
-      ).data;
-      order.chosenColor = { ...chosenData, data: selectionData };
+      );
+      order.chosenColor = { ...chosenData, data: selection.data };
+      break;
+    case "characteristic":
+      selection = order.additionalCharacteristics.find(
+        (char) => char.value === chosenData.value
+      );
+      if (selection && selection.data) {
+        order.chosenCharacteristic = { ...chosenData, data: selection.data };
+      } else {
+        order.chosenCharacteristic = {};
+      }
       break;
     case "count":
-      selectionData = order.counts.find(
+      selection = order.counts.find(
         (count) => count.value === chosenData.value
-      ).data;
-      order.chosenCount = { ...chosenData, data: selectionData };
+      );
+      order.chosenCount = { ...chosenData, data: selection.data };
       break;
     default:
       break;

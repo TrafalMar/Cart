@@ -29,6 +29,25 @@ const Order = (props) => {
     changeOnDropdown(orderId, chosenData, type);
   };
 
+  const getCharOptions = (sizes) => {
+    const initialOptions = [{ label: "Без характеристик", value: -1 }];
+    if (sizes.length === 0) {
+      return [
+        ...initialOptions,
+        ...od.additionalCharacteristics.filter((char) => char.data.size === 0),
+      ];
+    } else {
+      return [
+        ...initialOptions,
+        ...od.additionalCharacteristics.filter(
+          (char) => char.data.size === od.chosenSize.value
+        ),
+      ];
+    }
+  };
+
+  let charOptions = getCharOptions(od.sizes);
+
   return (
     <div className={styles.Order}>
       <div className={styles.imageSection}>
@@ -57,7 +76,7 @@ const Order = (props) => {
               onChange={(e) => dropdownChangeHandler(e, od.id, "size")}
               name="Размер"
               options={od.sizes}
-              chosenValue={od.chosenSize.label}
+              chosen={od.chosenSize}
             />
           )}
 
@@ -67,7 +86,7 @@ const Order = (props) => {
               onChange={(e) => dropdownChangeHandler(e, od.id, "color")}
               name="Цвет"
               options={od.colors}
-              chosenValue={od.chosenColor.label}
+              chosen={od.chosenColor}
             />
           )}
 
@@ -77,7 +96,7 @@ const Order = (props) => {
               onChange={(e) => dropdownChangeHandler(e, od.id, "count")}
               name="Количество"
               options={od.counts}
-              chosenValue={od.chosenCount.label}
+              chosen={od.chosenCount}
             />
           )}
         </div>
@@ -90,24 +109,17 @@ const Order = (props) => {
             : "Сохранить"}
         </button>
         <div className={styles.AdditionalFeatures}>
-          {/* <NamedDropdown
-            onChange={(e) => addCharacteristic(od.id, e)}
-            description="Дополнительные характеристики"
-            options={od.additionalCharacteristics}
-          /> */}
-          {od.selectedCharacteristics.map((char) => {
-            return (
-              <NamedDropdown
-                isEditModeAllowed={od.editMode}
-                key={char.value}
-                onChange={(event) =>
-                  editCharacteristic(od.id, char.value, event)
-                }
-                options={od.additionalCharacteristics}
-                chosenValue={char.label}
-              />
-            );
-          })}
+          {od.additionalCharacteristics.length !== 0 && (
+            <NamedDropdown
+              isEditModeAllowed={od.editMode}
+              onChange={(e) =>
+                dropdownChangeHandler(e, od.id, "characteristic")
+              }
+              options={charOptions}
+              placeholder={"Дополнительные характеристики"}
+              chosen={od.chosenCharacteristic}
+            />
+          )}
         </div>
         <div className={styles.Commentaries}>
           <NamedInput

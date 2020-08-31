@@ -45,6 +45,10 @@
   padding: 0 0.5rem 0 0.5rem;
 }
 
+.Attachments .ImageItem .DeleteButton:focus {
+  outline: none;
+}
+
 .Attachments .ImageItem .DeleteButton svg {
   height: 0.8rem;
 }

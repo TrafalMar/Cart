@@ -11,10 +11,21 @@ const NamedDropdown = (props) => {
     options,
     onChange,
     description,
-    chosenValue,
+    chosen,
+    placeholder,
   } = props;
 
-  const defaultValue = options[0];
+  // const isChosenInOptions =
+  //   options.find((option) => option.value === chosen.value) !== undefined;
+  // let value = isChosenInOptions ? chosen.label : options[0].label;
+
+  // const defaultValue = options[0];
+  let value = chosen.label + "";
+
+  if (chosen.data === undefined && placeholder.length !== 0) {
+    value = placeholder;
+  }
+
   return (
     <div className={styles.NamedDropdown}>
       {name && <span className={styles.Name}>{name + " :"}</span>}
@@ -43,14 +54,8 @@ const NamedDropdown = (props) => {
           </span>
         }
         options={options}
-        value={
-          chosenValue
-            ? chosenValue + ""
-            : description
-            ? description
-            : defaultValue
-        }
-        placeholder=". . ."
+        value={value}
+        placeholder={placeholder ? placeholder : ". . ."}
       />
     </div>
   );
